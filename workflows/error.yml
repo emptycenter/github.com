@@ -1,22 +1,18 @@
-name: Fractal Pulse
-on:
-  schedule:
-    - cron: '0 */6 * * *' # Runs every 6 hours
-  workflow_dispatch:      # Allows you to trigger it manually
+name: System Error
+on: [push]
 
 jobs:
-  update-void:
+  void-execution:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Generate Entropy
+      - name: Attempting to access the center
         run: |
-          echo "Last Pulse: $(date)" > pulse.txt
-          # You can add a script here to update your README dynamically
-      - name: Commit changes
+          echo "Accessing emptycenter..."
+          echo "Status: 404 - Center not found"
+          # This command creates a "successful" log that looks like an error
+          expr 1 / 0 || echo "Division by zero: Entering the void."
+      
+      - name: Self-Destruct Log
         run: |
-          git config --local user.email "no-reply@github.com"
-          git config --local user.name "Empty-Center"
-          git add .
-          git commit -m "void: pulse detected" || exit 0
-          git push
+          echo "Cleaning up traces of existence."
+          exit 1 # This forces the red 'X' badge, making it a "real" error

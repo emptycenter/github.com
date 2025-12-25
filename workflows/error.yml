@@ -1,0 +1,22 @@
+name: Fractal Pulse
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Runs every 6 hours
+  workflow_dispatch:      # Allows you to trigger it manually
+
+jobs:
+  update-void:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate Entropy
+        run: |
+          echo "Last Pulse: $(date)" > pulse.txt
+          # You can add a script here to update your README dynamically
+      - name: Commit changes
+        run: |
+          git config --local user.email "no-reply@github.com"
+          git config --local user.name "Empty-Center"
+          git add .
+          git commit -m "void: pulse detected" || exit 0
+          git push

@@ -1,6 +1,6 @@
 # [ 0x00 ] Empty-Center
 
-> "void"
+> void
 
 ---
 
